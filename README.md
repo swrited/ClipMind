@@ -1,7 +1,7 @@
 # 音视频转文字与总结工具
 
 这是一个基于Flask的Web应用，允许用户上传音频或视频文件，将其转换为文本，然后使用DeepSeek API进行内容总结。
-swrited@hotmail.com
+如果有问题可以联系我：swrited@hotmail.com
 
 ## 功能
 
