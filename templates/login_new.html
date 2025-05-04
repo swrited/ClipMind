@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ClipMind - 登录</title>
+    <meta name="description" content="ClipMind - 从视频片段到结构化思维，智能整理你的知识" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all" />
+    <!-- carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" media="all" />
+    <!-- font-awesome CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+    <!-- font-flaticon CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}" />
+    <!-- theme-default CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" type="text/css" media="all" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}" type="text/css" media="all" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all" />
+    <!-- transitions CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.transitions.css') }}" type="text/css" media="all" />
+    <!-- widget CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/widget.css') }}" type="text/css" media="all" />
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .login-form-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        padding: 40px;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      .login-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #151948;
+      }
+      .login-form input {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #151948;
+      }
+      .login-form input:focus {
+        border-color: #4fc1f0;
+        outline: none;
+      }
+      .login-btn {
+        background-color: #4fc1f0;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 12px 15px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .login-btn:hover {
+        background-color: #151948;
+      }
+      .register-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      .register-link a {
+        color: #4fc1f0;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .register-link a:hover {
+        text-decoration: underline;
+      }
+      .error-message {
+        color: #e74c3c;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .login-area {
+        padding: 100px 0;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .header_top_menu {
+        background-color: #151948;
+        padding: 10px 0;
+      }
+      .header_top_menu_text p {
+        color: white;
+        margin: 0;
+      }
+      .footer-area {
+        background-color: #151948;
+        padding: 20px 0;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+      .footer-text p {
+        margin: 0;
+      }
+      .app-welcome {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .app-welcome h1 {
+        font-size: 32px;
+        color: #151948;
+        margin-bottom: 10px;
+      }
+      .app-welcome p {
+        font-size: 18px;
+        color: #666;
+      }
+      .app-divider {
+        height: 4px;
+        width: 60px;
+        background-color: #4fc1f0;
+        margin: 15px auto;
+      }
+      .header-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .header-logo h3 {
+        margin: 0;
+        font-weight: 600;
+      }
+      .header-logo-left {
+        color: #4fc1f0;
+        margin-right: 10px;
+      }
+      .header-logo-right {
+        color: #151948;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Start Header Area -->
+    <div class="header_top_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="header_top_menu_address">
+              <div class="header_top_menu_text">
+                <p>ClipMind - 从视频片段到结构化思维</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header Area -->
+
+    <!-- Start Login Area -->
+    <div class="login-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="login-form-container">
+              <div class="login-title">
+                <h2>用户登录</h2>
+              </div>
+              {% if error %}
+              <div class="error-message">{{ error }}</div>
+              {% endif %}
+              <form method="post" action="{{ url_for('login') }}" class="login-form">
+                <div class="form-group">
+                  <input type="text" id="username" name="username" placeholder="用户名" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" id="password" name="password" placeholder="密码" required>
+                </div>
+                <button type="submit" class="login-btn">登录</button>
+              </form>
+              <div class="register-link">
+                <p>还没有账号？<a href="{{ url_for('register') }}">注册</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Login Area -->
+
+    <!-- Start Footer Area -->
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer-text text-center">
+              <p>© 2025 ClipMind. 保留所有权利.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Footer Area -->
+
+    <!-- jquery js -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-3.2.1.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- carousel js -->
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <!-- counterup js -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- waypoints js -->
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <!-- wow js -->
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <!-- imagesloaded js -->
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <!-- main js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

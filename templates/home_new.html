@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ClipMind - 从视频片段到结构化思维</title>
+    <meta name="description" content="ClipMind - 从视频片段到结构化思维，智能整理你的知识" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all" />
+    <!-- carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" media="all" />
+    <!-- font-awesome CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+    <!-- font-flaticon CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}" />
+    <!-- theme-default CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" type="text/css" media="all" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}" type="text/css" media="all" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all" />
+    <!-- transitions CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.transitions.css') }}" type="text/css" media="all" />
+    <!-- widget CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/widget.css') }}" type="text/css" media="all" />
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* 顶部导航栏样式 */
+      .header_top_menu {
+        background-color: #151948;
+        padding: 10px 0;
+      }
+      .header_top_menu_text p {
+        color: white;
+        margin: 0;
+      }
+      .header_top_menu_icon ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: right;
+      }
+      .header_top_menu_icon ul li {
+        display: inline-block;
+        margin-left: 15px;
+        position: relative;
+      }
+      .header_top_menu_icon ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .header_top_menu_icon ul li a:hover {
+        color: #4fc1f0;
+      }
+      .active-nav {
+        color: #4fc1f0 !important;
+        font-weight: bold;
+      }
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        min-width: 120px;
+        display: none;
+        z-index: 1000;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-menu li {
+        display: block !important;
+        margin: 0 !important;
+      }
+      .dropdown-menu li a {
+        display: block;
+        padding: 8px 15px;
+        color: #333 !important;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .dropdown-menu li a:hover {
+        background-color: #f8f9fa;
+        color: #4fc1f0 !important;
+      }
+      .shape1 {
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background-color: rgba(79, 193, 240, 0.2);
+        z-index: 1;
+      }
+      .shape2 {
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background-color: rgba(79, 193, 240, 0.15);
+        z-index: 1;
+      }
+
+      /* 顶部标题区样式 */
+      .hero-section {
+        background: linear-gradient(135deg, #3a1c71 0%, #4776e6 50%, #8e54e9 100%);
+        color: white;
+        text-align: center;
+        padding: 100px 0 80px;
+      }
+      .hero-title {
+        font-size: 64px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+      }
+      .hero-subtitle {
+        font-size: 22px;
+        font-weight: 300;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        opacity: 0.9;
+      }
+
+      /* 产品简介区样式 */
+      .intro-section {
+        padding: 80px 0;
+        background-color: #f8f9fa;
+      }
+      .intro-title {
+        font-size: 32px;
+        color: #151948;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+      .intro-text {
+        font-size: 18px;
+        color: #666;
+        max-width: 800px;
+        line-height: 1.7;
+      }
+
+      /* 功能卡片区样式 */
+      .features-section {
+        padding: 80px 0;
+        background-color: white;
+      }
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-title h2 {
+        font-size: 36px;
+        color: #151948;
+        margin-bottom: 15px;
+      }
+      .section-title p {
+        font-size: 18px;
+        color: #666;
+      }
+      .feature-box {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+      }
+      .feature-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+      .feature-icon {
+        font-size: 40px;
+        color: #4fc1f0;
+        margin-bottom: 20px;
+      }
+      .feature-title {
+        font-size: 22px;
+        color: #151948;
+        margin-bottom: 15px;
+      }
+      .feature-text {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* 行动号召区样式 */
+      .cta-section {
+        background-color: #4fc1f0;
+        padding: 80px 0;
+        color: white;
+        text-align: center;
+      }
+      .cta-title {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+      .cta-text {
+        font-size: 18px;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+      .cta-btn {
+        display: inline-block;
+        background-color: white;
+        color: #151948;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 18px;
+      }
+      .cta-btn:hover {
+        background-color: #151948;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .cta-note {
+        font-size: 14px;
+        margin-top: 20px;
+        opacity: 0.8;
+      }
+
+      /* 页脚样式 */
+      .footer-area {
+        background-color: #151948;
+        padding: 20px 0;
+        color: white;
+      }
+      .footer-text p {
+        margin: 0;
+      }
+
+      /* 图片动画效果 */
+      .hero-image {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 42px;
+        }
+        .hero-subtitle {
+          font-size: 18px;
+        }
+        .intro-title {
+          font-size: 28px;
+        }
+        .intro-text {
+          font-size: 16px;
+        }
+        .feature-box {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Start Header Area -->
+    <div class="header_top_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="header_top_menu_address">
+              <div class="header_top_menu_text">
+                <p>ClipMind - 从视频片段到结构化思维</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="header_top_menu_icon">
+              <div class="header_top_menu_icon_inner">
+                <ul>
+                  <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active-nav{% endif %}">首页</a></li>
+                  <li><a href="{{ url_for('index') }}" class="{% if request.path == url_for('index') %}active-nav{% endif %}">使用</a></li>
+                  {% if 'user_id' in session %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">{{ session.get('username') }} <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('profile') }}">个人中心</a></li>
+                      <li><a href="{{ url_for('logout') }}">退出登录</a></li>
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li><a href="{{ url_for('login') }}">登录</a></li>
+                  <li><a href="{{ url_for('register') }}">注册</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header Area -->
+
+    <!-- 区块1：顶部标题区 -->
+    <section class="hero-section">
+      <div class="shape1"></div>
+      <div class="shape2"></div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+              <h1 class="hero-title">ClipMind</h1>
+              <p class="hero-subtitle">从视频片段到结构化思维，智能整理你的知识</p>
+              <div class="hero-cta mt-4">
+                <h3 class="mb-3">立即体验高效学习</h3>
+                <a href="{{ url_for('index') }}" class="cta-btn">免费试用 ClipMind</a>
+                <p class="mt-3 text-light">支持本地视频及会议录制文件</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-image">
+              <img src="https://cdn-icons-png.flaticon.com/512/2103/2103652.png" alt="ClipMind" style="max-width: 300px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 区块2：产品简介区 -->
+    <section class="intro-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <h2 class="intro-title">为什么选择 ClipMind？</h2>
+            <p class="intro-text">在信息过载的时代，视频学习效率低下？ClipMind 通过AI技术自动提取视频关键内容，生成思维导图和笔记，让学习事半功倍。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 区块3：功能卡片区 -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>核心功能</h2>
+          <p>让视频学习更高效，知识整理更智能</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <h3 class="feature-title">智能总结</h3>
+              <p class="feature-text">自动分析视频语音和字幕，提取关键论点、金句和数据。</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <h3 class="feature-title">思维导图</h3>
+              <p class="feature-text">一键将视频内容转化为可交互的思维导图，支持自定义编辑。</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3 class="feature-title">AI课堂测试</h3>
+              <p class="feature-text">基于视频内容自动生成测验题，巩固学习效果，支持选择题/简答题，并且可以与AI老师自由探讨。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Start Footer Area -->
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer-text text-center">
+              <p>© 2025 ClipMind. 保留所有权利.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Footer Area -->
+
+    <!-- jquery js -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-3.2.1.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- carousel js -->
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <!-- counterup js -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- waypoints js -->
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <!-- wow js -->
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <!-- imagesloaded js -->
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <!-- main js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

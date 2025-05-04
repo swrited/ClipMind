@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ClipMind - 个人中心</title>
+    <meta name="description" content="ClipMind - 从视频片段到结构化思维，智能整理你的知识" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all" />
+    <!-- carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" media="all" />
+    <!-- font-awesome CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+    <!-- font-flaticon CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}" />
+    <!-- theme-default CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" type="text/css" media="all" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}" type="text/css" media="all" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all" />
+    <!-- transitions CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.transitions.css') }}" type="text/css" media="all" />
+    <!-- widget CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/widget.css') }}" type="text/css" media="all" />
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .main-content-area {
+        padding: 80px 0 50px;
+        min-height: calc(100vh - 200px);
+      }
+      .profile-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        margin-bottom: 30px;
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+      }
+      .profile-title {
+        color: #151948;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .profile-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #4fc1f0;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 600;
+        margin-right: 20px;
+      }
+      .profile-info {
+        margin-bottom: 30px;
+      }
+      .profile-info-title {
+        font-size: 18px;
+        color: #151948;
+        margin-bottom: 15px;
+        border-left: 4px solid #4fc1f0;
+        padding-left: 10px;
+      }
+      .profile-info-item {
+        display: flex;
+        margin-bottom: 15px;
+      }
+      .profile-info-label {
+        width: 120px;
+        color: #666;
+        font-weight: 500;
+      }
+      .profile-info-value {
+        flex: 1;
+        color: #333;
+      }
+      .profile-stats {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+      .profile-stat-item {
+        flex: 1;
+        min-width: 150px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .profile-stat-item:last-child {
+        margin-right: 0;
+      }
+      .profile-stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #4fc1f0;
+        margin-bottom: 5px;
+      }
+      .profile-stat-label {
+        color: #666;
+        font-size: 14px;
+      }
+      .profile-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .profile-action-btn {
+        background-color: #4fc1f0;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+      .profile-action-btn:hover {
+        background-color: #151948;
+      }
+      .profile-action-btn.danger {
+        background-color: #e74c3c;
+      }
+      .profile-action-btn.danger:hover {
+        background-color: #c0392b;
+      }
+      .header_top_menu {
+        background-color: #151948;
+        padding: 10px 0;
+      }
+      .header_top_menu_text p {
+        color: white;
+        margin: 0;
+      }
+      .header_top_menu_icon ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: right;
+      }
+      .header_top_menu_icon ul li {
+        display: inline-block;
+        margin-left: 15px;
+      }
+      .header_top_menu_icon ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      .footer-area {
+        background-color: #151948;
+        padding: 20px 0;
+        color: white;
+      }
+      .footer-text p {
+        margin: 0;
+      }
+      .header-logo {
+        display: flex;
+        align-items: center;
+      }
+      .header-logo h3 {
+        margin: 0;
+        color: #4fc1f0;
+        font-weight: 600;
+      }
+      .header-logo-left {
+        color: #4fc1f0;
+        margin-right: 10px;
+      }
+      .header-logo-right {
+        color: #151948;
+      }
+      .nav-link {
+        color: #151948;
+        font-weight: 500;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+      }
+      .nav-link:hover, .nav-link.active {
+        color: #4fc1f0;
+      }
+      .history-item {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      .history-item-title {
+        font-weight: 600;
+        color: #151948;
+        margin-bottom: 5px;
+      }
+      .history-item-date {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 10px;
+      }
+      .history-item-summary {
+        color: #333;
+        font-size: 14px;
+      }
+      .header_top_menu_icon ul li {
+        display: inline-block;
+        margin-left: 15px;
+        position: relative;
+      }
+      .header_top_menu_icon ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .header_top_menu_icon ul li a:hover {
+        color: #4fc1f0;
+      }
+      .active-nav {
+        color: #4fc1f0 !important;
+        font-weight: bold;
+      }
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        min-width: 120px;
+        display: none;
+        z-index: 1000;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-menu li {
+        display: block !important;
+        margin: 0 !important;
+      }
+      .dropdown-menu li a {
+        display: block;
+        padding: 8px 15px;
+        color: #333 !important;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .dropdown-menu li a:hover {
+        background-color: #f8f9fa;
+        color: #4fc1f0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Start Header Area -->
+    <div class="header_top_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="header_top_menu_address">
+              <div class="header_top_menu_text">
+                <p>ClipMind - 从视频片段到结构化思维</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="header_top_menu_icon">
+              <div class="header_top_menu_icon_inner">
+                <ul>
+                  <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active-nav{% endif %}">首页</a></li>
+                  <li><a href="{{ url_for('index') }}" class="{% if request.path == url_for('index') %}active-nav{% endif %}">使用</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">{{ username }} <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('profile') }}" class="{% if request.path == url_for('profile') %}active-nav{% endif %}">个人中心</a></li>
+                      <li><a href="{{ url_for('logout') }}">退出登录</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Main Menu Area -->
+    <div id="sticky-header" class="cyber_nav_manu d-md-none d-lg-block d-sm-none d-none">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Logo removed as requested -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-menu-area d-sm-block d-md-block d-lg-none">
+      <div class="mobile-menu">
+        <nav class="cyber_menu">
+          <ul>
+            <li><a href="{{ url_for('home') }}">首页</a></li>
+            <li><a href="{{ url_for('index') }}">使用</a></li>
+            <li><a href="{{ url_for('profile') }}">个人中心</a></li>
+            <li><a href="{{ url_for('logout') }}">退出登录</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- End Main Menu Area -->
+
+    <!-- Start Main Content Area -->
+    <div class="main-content-area" id="home">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="profile-container">
+              <div class="profile-header">
+                <div class="profile-avatar">
+                  {{ username[0].upper() }}
+                </div>
+                <div>
+                  <h2 class="profile-title">{{ username }}</h2>
+                  <p>用户ID: {{ user_id }}</p>
+                </div>
+              </div>
+
+              <div class="profile-stats">
+                <div class="profile-stat-item">
+                  <div class="profile-stat-value">{{ usage_count }}</div>
+                  <div class="profile-stat-label">使用次数</div>
+                </div>
+                <div class="profile-stat-item">
+                  <div class="profile-stat-value">{{ join_days }}</div>
+                  <div class="profile-stat-label">加入天数</div>
+                </div>
+                <div class="profile-stat-item">
+                  <div class="profile-stat-value">{{ last_usage }}</div>
+                  <div class="profile-stat-label">上次使用</div>
+                </div>
+              </div>
+
+              <div class="profile-info">
+                <h3 class="profile-info-title">账户信息</h3>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">用户名</div>
+                  <div class="profile-info-value">{{ username }}</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">注册时间</div>
+                  <div class="profile-info-value">{{ register_time }}</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">账户状态</div>
+                  <div class="profile-info-value">正常</div>
+                </div>
+              </div>
+
+              <div class="profile-info">
+                <h3 class="profile-info-title">使用历史</h3>
+                {% if history %}
+                  {% for item in history %}
+                  <div class="history-item">
+                    <div class="history-item-title">
+                      <a href="{{ url_for('history_detail', history_id=item.id) }}">{{ item.filename }}</a>
+                    </div>
+                    <div class="history-item-date">{{ item.created_at }}</div>
+                    <div class="history-item-summary">{{ item.summary[:150] }}{% if item.summary|length > 150 %}...{% endif %}</div>
+                    <div class="mt-2">
+                      <a href="{{ url_for('history_detail', history_id=item.id) }}" class="btn btn-sm btn-outline-primary">查看详情</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                {% else %}
+                <p>暂无使用记录</p>
+                {% endif %}
+              </div>
+
+              <div class="profile-actions">
+                <button class="profile-action-btn" onclick="location.href='{{ url_for('index') }}'">开始使用</button>
+                <button class="profile-action-btn danger" onclick="if(confirm('确定要清空历史记录吗？')) location.href='{{ url_for('clear_history') }}'">清空历史</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Main Content Area -->
+
+    <!-- Start Footer Area -->
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer-text text-center">
+              <p>© 2025 ClipMind. 保留所有权利.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Footer Area -->
+
+    <!-- jquery js -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-3.2.1.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- carousel js -->
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <!-- counterup js -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- waypoints js -->
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <!-- wow js -->
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <!-- imagesloaded js -->
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <!-- main js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+flask==2.2.3
+SpeechRecognition==3.8.1
+moviepy==1.0.3
+requests==2.26.0
+python-dotenv==0.19.1
+pydub==0.25.1
+# 百度语音识别 API 依赖
+baidu-aip==2.2.18.0
+# Vosk 离线语音识别依赖
+vosk==0.3.45
+# 科大讯飞语音识别 API 依赖
+websocket-client==1.6.1

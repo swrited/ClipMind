@@ -1,0 +1,27 @@
+# Python虚拟环境
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 环境变量文件
+.env
+
+# 上传的文件和临时文件
+uploads/*
+!uploads/.gitkeep
+extracted_audio/*
+!extracted_audio/.gitkeep
+transcriptions/*
+!transcriptions/.gitkeep
+
+# 数据库文件
+*.db
+
+# 大型模型文件
+vosk-model-cn.zip
+vosk-model-cn/
+
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ClipMind - 历史记录详情</title>
+    <meta name="description" content="ClipMind - 从视频片段到结构化思维，智能整理你的知识" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css" media="all" />
+    <!-- carousel CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" type="text/css" media="all" />
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" media="all" />
+    <!-- font-awesome CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+    <!-- font-flaticon CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}" />
+    <!-- theme-default CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" type="text/css" media="all" />
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/meanmenu.min.css') }}" type="text/css" media="all" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all" />
+    <!-- transitions CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.transitions.css') }}" type="text/css" media="all" />
+    <!-- widget CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/widget.css') }}" type="text/css" media="all" />
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        line-height: 1.6;
+      }
+      .main-content-area {
+        padding: 80px 0 50px;
+        min-height: calc(100vh - 200px);
+      }
+      .content-box {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        margin-bottom: 30px;
+      }
+      .content-title {
+        color: #151948;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+      .content-divider {
+        height: 3px;
+        width: 50px;
+        background-color: #4fc1f0;
+        margin-bottom: 20px;
+      }
+      .nav-link:hover, .nav-link.active {
+        color: #4fc1f0;
+      }
+      .chat-container {
+        max-height: 500px;
+        overflow-y: auto;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+      }
+      .chat-message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        max-width: 80%;
+      }
+      .user-message {
+        background-color: #e3f2fd;
+        margin-left: auto;
+        text-align: right;
+      }
+      .assistant-message {
+        background-color: #f5f5f5;
+        margin-right: auto;
+      }
+      .message-time {
+        font-size: 12px;
+        color: #999;
+        margin-top: 5px;
+      }
+      .chat-input-container {
+        display: flex;
+        margin-top: 20px;
+      }
+      .chat-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+      .send-btn {
+        background-color: #4fc1f0;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      .tab-content {
+        padding: 20px 0;
+      }
+      .nav-tabs {
+        border-bottom: 2px solid #eee;
+      }
+      .nav-tabs .nav-link {
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: #666;
+      }
+      .nav-tabs .nav-link.active {
+        border-bottom: 2px solid #4fc1f0;
+        color: #4fc1f0;
+      }
+      .header_top_menu_icon ul li {
+        display: inline-block;
+        margin-left: 15px;
+        position: relative;
+      }
+      .header_top_menu_icon ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .header_top_menu_icon ul li a:hover {
+        color: #4fc1f0;
+      }
+      .active-nav {
+        color: #4fc1f0 !important;
+        font-weight: bold;
+      }
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-toggle {
+        cursor: pointer;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        min-width: 120px;
+        display: none;
+        z-index: 1000;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-menu li {
+        display: block !important;
+        margin: 0 !important;
+      }
+      .dropdown-menu li a {
+        display: block;
+        padding: 8px 15px;
+        color: #333 !important;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .dropdown-menu li a:hover {
+        background-color: #f8f9fa;
+        color: #4fc1f0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Start Header Area -->
+    <div class="header_top_menu">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="header_top_menu_address">
+              <div class="header_top_menu_text">
+                <p>ClipMind - 从视频片段到结构化思维</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="header_top_menu_icon">
+              <div class="header_top_menu_icon_inner">
+                <ul>
+                  <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active-nav{% endif %}">首页</a></li>
+                  <li><a href="{{ url_for('index') }}" class="{% if request.path == url_for('index') %}active-nav{% endif %}">使用</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">{{ username }} <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('profile') }}" class="{% if request.path == url_for('profile') %}active-nav{% endif %}">个人中心</a></li>
+                      <li><a href="{{ url_for('logout') }}">退出登录</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Start Main Menu Area -->
+    <div id="sticky-header" class="cyber_nav_manu d-md-none d-lg-block d-sm-none d-none">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Logo removed as requested -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-menu-area d-sm-block d-md-block d-lg-none">
+      <div class="mobile-menu">
+        <nav class="cyber_menu">
+          <ul>
+            <li><a href="{{ url_for('home') }}">首页</a></li>
+            <li><a href="{{ url_for('index') }}">使用</a></li>
+            <li><a href="{{ url_for('profile') }}">个人中心</a></li>
+            <li><a href="{{ url_for('logout') }}">退出登录</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- End Main Menu Area -->
+
+    <!-- Start Main Content Area -->
+    <div class="main-content-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="content-box">
+              <h2 class="content-title">历史记录详情</h2>
+              <div class="content-divider"></div>
+              
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <h5>文件名: {{ history.filename }}</h5>
+                  <p class="text-muted">处理时间: {{ history.created_at }}</p>
+                </div>
+                <div class="col-md-6 text-md-right">
+                  <a href="{{ url_for('profile') }}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> 返回个人中心</a>
+                </div>
+              </div>
+              
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="summary-tab" data-toggle="tab" href="#summary" role="tab">内容总结</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="keywords-tab" data-toggle="tab" href="#keywords" role="tab">关键词和框架</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="test-tab" data-toggle="tab" href="#test" role="tab">课堂测试</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="original-tab" data-toggle="tab" href="#original" role="tab">原始文本</a>
+                </li>
+              </ul>
+              
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="summary" role="tabpanel">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">内容总结</h5>
+                      <div class="card-text">{{ history.summary|safe }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="keywords" role="tabpanel">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">关键词和框架</h5>
+                      <div class="card-text">{{ history.keywords_and_framework|safe }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="test" role="tabpanel">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">课堂测试</h5>
+                      <div class="card-text">{{ history.test_questions|safe }}</div>
+                      
+                      <div class="mt-4">
+                        <h5>与AI老师对话</h5>
+                        <div class="chat-container" id="chatContainer">
+                          {% if chat_history %}
+                            {% for message in chat_history %}
+                              <div class="chat-message {% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
+                                <div class="message-content">{{ message.content }}</div>
+                                <div class="message-time">{{ message.created_at }}</div>
+                              </div>
+                            {% endfor %}
+                          {% else %}
+                            <div class="text-center text-muted">
+                              <p>暂无对话记录，开始提问吧！</p>
+                            </div>
+                          {% endif %}
+                        </div>
+                        
+                        <div class="chat-input-container">
+                          <input type="text" class="chat-input" id="chatInput" placeholder="输入您的问题...">
+                          <button class="send-btn" id="sendBtn">发送</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="original" role="tabpanel">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">原始文本</h5>
+                      <div class="card-text">{{ history.original_text }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Main Content Area -->
+
+    <!-- Start Footer Area -->
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer-text text-center">
+              <p>© 2025 ClipMind. 保留所有权利.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Footer Area -->
+
+    <!-- jquery js -->
+    <script src="{{ url_for('static', filename='js/vendor/jquery-3.2.1.min.js') }}"></script>
+    <!-- bootstrap js -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- carousel js -->
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <!-- counterup js -->
+    <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+    <!-- waypoints js -->
+    <script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+    <!-- wow js -->
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <!-- imagesloaded js -->
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <!-- main js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+      $(document).ready(function() {
+        // 聊天功能
+        const chatContainer = document.getElementById('chatContainer');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        
+        // 聊天历史
+        let chatHistory = [];
+        {% if chat_history %}
+          {% for message in chat_history %}
+            chatHistory.push({
+              role: '{{ message.role }}',
+              content: `{{ message.content|safe }}`
+            });
+          {% endfor %}
+        {% endif %}
+        
+        // 滚动到底部
+        function scrollToBottom() {
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // 添加消息
+        function addMessage(role, content) {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `chat-message ${role === 'user' ? 'user-message' : 'assistant-message'}`;
+          
+          const contentDiv = document.createElement('div');
+          contentDiv.className = 'message-content';
+          contentDiv.innerHTML = content;
+          
+          const timeDiv = document.createElement('div');
+          timeDiv.className = 'message-time';
+          const now = new Date();
+          timeDiv.textContent = now.toLocaleString();
+          
+          messageDiv.appendChild(contentDiv);
+          messageDiv.appendChild(timeDiv);
+          
+          chatContainer.appendChild(messageDiv);
+          scrollToBottom();
+        }
+        
+        // 发送消息
+        function sendMessage() {
+          const message = chatInput.value.trim();
+          if (!message) return;
+          
+          // 添加用户消息
+          addMessage('user', message);
+          
+          // 更新聊天历史
+          chatHistory.push({
+            role: 'user',
+            content: message
+          });
+          
+          // 清空输入框
+          chatInput.value = '';
+          
+          // 发送到服务器
+          fetch('/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: message,
+              context: {
+                original_text: `{{ history.original_text|safe }}`,
+                summary: `{{ history.summary|safe }}`,
+                test_questions: `{{ history.test_questions|safe }}`,
+                history_id: {{ history.id }}
+              },
+              chat_history: chatHistory
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              addMessage('assistant', `<span class="text-danger">错误: ${data.error}</span>`);
+            } else {
+              // 添加AI回复
+              addMessage('assistant', data.response);
+              
+              // 更新聊天历史
+              chatHistory.push({
+                role: 'assistant',
+                content: data.response
+              });
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            addMessage('assistant', '<span class="text-danger">发送消息时出错，请重试</span>');
+          });
+        }
+        
+        // 绑定发送按钮点击事件
+        sendBtn.addEventListener('click', sendMessage);
+        
+        // 绑定输入框回车事件
+        chatInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+        
+        // 初始滚动到底部
+        scrollToBottom();
+      });
+    </script>
+  </body>
+</html>
